@@ -8,10 +8,10 @@ load_dotenv()
 
 class IsAdmin(BaseFilter):
     async def __call__(self, message: Message) -> bool:
-        return str(message.chat.id) in os.getenv("ADMIN_IDS").split(',')
+        return str(message.chat.id) in os.getenv("ADMINS_ID").split(',')
 
 
 class IsAdminCallback(BaseFilter):
     async def __call__(self, call: CallbackQuery) -> bool:
-        return str(call.message.chat.id) == os.getenv("ADMIN_IDS").split(',')
+        return str(call.message.chat.id) == os.getenv("ADMINS_ID").split(',')
 
