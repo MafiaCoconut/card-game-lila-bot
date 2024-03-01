@@ -1,6 +1,6 @@
 from aiogram import Dispatcher, F
 
-from handlers import bot_messages, user_commands
+from handlers import bot_messages, user_commands, intro_messages
 
 dp = Dispatcher()
 # dp.message.middleware(SomeMiddleware())
@@ -11,10 +11,16 @@ def include_routers():
     dp.include_routers(
         user_commands.router,
         bot_messages.router,
+        intro_messages.router,
     )
 
 
 def register_all_callbacks():
+
+    dp.callback_query.register(intro_messages.introduce_game_basics, F.data == "send_second_message")
+    dp.callback_query.register(intro_messages.introduce_lila_for_self_discovery, F.data == "send_third_message")
+    dp.callback_query.register(intro_messages.initiate_game_with_personal_request, F.data == "send_fourth_message")
+    dp.callback_query.register(intro_messages.start_the_game, F.data == "start_game")
     pass
     # # Help меню админа
     # register_admin_help_menu()

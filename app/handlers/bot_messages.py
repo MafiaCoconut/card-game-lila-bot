@@ -14,7 +14,7 @@ router = Router()
 # @router.message(F.content_type.in_({'sticker'}))
 async def echo_handler(message: Message) -> None:
     """Функция вывода заглушки на необъявленное сообщение/команду"""
-    send_log(message.text, message.chat.username)
+    # send_log(message.text, message.chat.username)
     await message.answer("Команды не найдено. Повторите попытку ввода.")
 
 
