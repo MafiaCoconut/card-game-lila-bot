@@ -1,4 +1,4 @@
-from datetime import datetime
+import time
 
 from utils.logs import set_func, set_func_and_person
 from aiogram.types import CallbackQuery
@@ -34,8 +34,8 @@ async def get_stub(call: CallbackQuery, l10n):
     await call.answer()
 
 
-async def send_message_to_admin(message, _reply_markup=None):
-    await bot.send_message(get_admin_id(), message, reply_markup=_reply_markup)
+# async def send_message_to_admin(message, _reply_markup=None):
+#     await bot.send_message(get_admin_id(), message, reply_markup=_reply_markup)
 
 
 def is_weekday():

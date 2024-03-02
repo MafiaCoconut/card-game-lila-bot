@@ -55,10 +55,10 @@ def logs_settings():
     formatter = logging.Formatter(fmt='[%(levelname)s] %(asctime)s - %(message)s', datefmt='%d.%m-%H:%M')
 
     # Настройка вывода данных в файлы
-    system_handler = logging.FileHandler('system_data.log')
+    system_handler = logging.FileHandler('system_data.log', encoding='utf-8')
     system_handler.setFormatter(formatter)
 
-    user_handler = logging.FileHandler('user_data.log')
+    user_handler = logging.FileHandler('user_data.log', encoding='utf-8')
     user_handler.setFormatter(formatter)
 
     global system_logger
@@ -66,6 +66,7 @@ def logs_settings():
         logging.basicConfig(
             format='[%(levelname)s] %(asctime)s - %(message)s',
             datefmt='%d.%m-%H:%M',
+            encoding='utf-8'
         )
         system_logger.setLevel(logging.DEBUG)
     else:
@@ -74,6 +75,7 @@ def logs_settings():
 
     apscheduler_logger = logging.getLogger('apscheduler')
     apscheduler_logger.setLevel(logging.DEBUG)
+
     apscheduler_logger.addHandler(system_handler)
 
     aiogram_logger = logging.getLogger('aiogram')

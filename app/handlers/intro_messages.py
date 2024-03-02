@@ -3,9 +3,17 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, CallbackQuery, FSInputFile
 from aiogram.fsm.context import FSMContext
 
+import time
+
 from utils.logs import set_func, set_func_and_person
 from utils.bot import bot
-from data.text import text2, essence_of_the_game, rules_of_the_game, forms_for_notes, recommendations, start_game
+from utils.states import EditLastMessageState
+
+# from data.text_debug import (
+from data.text import (
+    introduce_game_basics, essence_of_the_game, rules_of_the_game,
+    forms_for_notes, recommendations, start_game, remaining_time
+)
 from filters.is_admin import IsAdmin
 from keyboards.inline import create_one_inline_button, create_two_inline_buttons
 
@@ -13,45 +21,88 @@ router = Router()
 tag = "intro_messages"
 
 
-async def introduce_game_basics(call: CallbackQuery):
-    function_name = "introduce_game_basics"
+async def introduce_lila_for_self_discovery_handler(call: CallbackQuery, state: FSMContext) -> None:
+    function_name = "introduce_lila_for_self_discovery_handler"
     set_func_and_person(function_name, tag, call.message)
 
-    await call.message.answer(text2,
-                              reply_markup=create_two_inline_buttons(text1="Давай", call_data1="send_third_message",
-                                                                     text2="Уже играл", call_data2="start_game"), )
+    data = await state.get_data()
+    await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
     await call.answer()
-
-
-async def introduce_lila_for_self_discovery(call: CallbackQuery):
-    function_name = "introduce_lila_for_self_discovery"
-    set_func_and_person(function_name, tag, call.message)
 
     await call.message.answer(essence_of_the_game)
-    await call.message.answer(rules_of_the_game)
-
-    # TODO добавить таймер на 15 секунд
-
-    await call.message.answer(forms_for_notes, reply_markup=create_one_inline_button(text="Конечно готов",
-                                                                                     call_data="send_fourth_message"))
-    await call.answer()
+    await rules_of_the_game_handler(call)
+    await forms_for_notes_handler(call, state)
 
 
-async def initiate_game_with_personal_request(call: CallbackQuery):
-    function_name = "initiate_game_with_personal_request"
+async def rules_of_the_game_handler(call: CallbackQuery) -> None:
+    function_name = "rules_of_the_game_handler"
     set_func_and_person(function_name, tag, call.message)
 
-    await call.message.answer(recommendations, reply_markup=create_one_inline_button(text="Начать игру",
-                                                                                     call_data="start_game"))
-    await call.answer()
+    time_message = await call.message.answer(rules_of_the_game + remaining_time.replace('_', '15'), )
+
+    for i in range(14, -1, -1):
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
+                                    text=rules_of_the_game + remaining_time.replace('_', str(i)))
+        time.sleep(1)
+
+    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
+                                text=rules_of_the_game)
 
 
-async def start_the_game(call: CallbackQuery):
-    function_name = "start_game"
+async def forms_for_notes_handler(call: CallbackQuery, state: FSMContext):
+    function_name = "forms_for_notes_handler"
     set_func_and_person(function_name, tag, call.message)
+
+    new_message = await call.message.answer_photo(
+        caption=forms_for_notes + remaining_time.replace('_', '15'),
+        photo=FSInputFile("data/plug.jpg"),
+        reply_markup=create_one_inline_button(text="Конечно готов",
+                                              call_data="send_fourth_message"))
+
+    await call.message.answer_document(document=FSInputFile("data/blank_for_notes.jpg"))
+    await state.update_data(message_id=new_message.message_id)
+
+    for i in range(14, -1, -1):
+        await bot.edit_message_caption(chat_id=call.message.chat.id, message_id=new_message.message_id,
+                                       caption=forms_for_notes + remaining_time.replace('_', str(i), ))
+        time.sleep(1)
+
+    await bot.edit_message_caption(chat_id=call.message.chat.id, message_id=new_message.message_id,
+                                   caption=forms_for_notes,
+                                   reply_markup=create_one_inline_button(text="Конечно готов",
+                                                                         call_data="send_third_message"))
+
+
+async def initiate_game_with_personal_request_handler(call: CallbackQuery, state: FSMContext):
+    function_name = "initiate_game_with_personal_request_handler"
+    set_func_and_person(function_name, tag, call.message)
+
+    await call.answer()
+    data = await state.get_data()
+    await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
+
+    # await call.message.answer(recommendations, reply_markup=create_one_inline_button(text="Начать игру",
+    #                                                                                  call_data="start_game"))
+
+    new_message = await call.message.answer(recommendations + remaining_time.replace('_', '15'))
+    await state.update_data(message_id=new_message.message_id)
+
+    for i in range(14, -1, -1):
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=new_message.message_id,
+                                    text=recommendations + remaining_time.replace('_', str(i), ))
+        time.sleep(1)
+
+    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=new_message.message_id,
+                                text=recommendations + "\n\nТеперь нажимай кнопку «Начать игру»",
+                                reply_markup=create_one_inline_button(text="Начать игру", call_data="start_game"))
+
+
+async def start_the_game_handler(call: CallbackQuery, state: FSMContext):
+    function_name = "start_the_game_handler"
+    set_func_and_person(function_name, tag, call.message)
+
+    data = await state.get_data()
+    await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
 
     await call.message.answer(start_game)
     await call.answer()
-
-
-

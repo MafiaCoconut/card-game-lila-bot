@@ -5,9 +5,14 @@ from aiogram.fsm.context import FSMContext
 
 from utils.logs import set_func, set_func_and_person
 from utils.bot import bot
-from data.text import text1
+
+from data.text import introduce_game_basics
+# from data.text_debug import introduce_game_basics
+
+from utils.states import EditLastMessageState
 from filters.is_admin import IsAdmin
-from keyboards.inline import create_one_inline_button
+from keyboards.inline import create_one_inline_button, create_two_inline_buttons
+
 router = Router()
 tag = "user_commands"
 status = "debug"
@@ -18,8 +23,15 @@ async def command_start_handler(message: Message, state: FSMContext) -> None:
     function_name = "command_start_handler"
     set_func(function_name, tag, status)
 
-    await message.answer(text1, reply_markup=create_one_inline_button(text="Запустить",
-                                                                      call_data="send_second_message"))
+    await state.set_state(EditLastMessageState.message_id)
+    new_message = await message.answer_photo(photo=FSInputFile("data/plug.jpg"),
+                                             caption=introduce_game_basics,
+                                             reply_markup=create_two_inline_buttons(text1="Давай",
+                                                                                    call_data1="send_second_message",
+                                                                                    text2="Уже играл",
+                                                                                    call_data2="start_game"))
+
+    await state.update_data(message_id=new_message.message_id)
 
 
 @router.message(Command("help"))
@@ -58,7 +70,6 @@ async def admin_send_system_logs_with_command(message: Message):
 
     await message.answer_document(text=text, document=FSInputFile(path='system_data.log'))
 
-
 # @router.message(F.text == '/test')
 # async def admin_test(message: Message):
 #     function_name = "admin_test"
@@ -67,5 +78,4 @@ async def admin_send_system_logs_with_command(message: Message):
 #     await message.answer(text=str(message.message_id))
 #     # text = "Логи отправлены"
 
-    # await message.answer_document(text=text, document=FSInputFile(path='system_data.log'))
-
+# await message.answer_document(text=text, document=FSInputFile(path='system_data.log'))
