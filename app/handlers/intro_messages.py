@@ -9,13 +9,14 @@ from utils.logs import set_func, set_func_and_person
 from utils.bot import bot
 from utils.states import EditLastMessageState
 
-from data.text_debug import (
-# from data.text import (
+# from data.text_debug import (
+from data.text import (
     introduce_game_basics, essence_of_the_game, rules_of_the_game,
     forms_for_notes, recommendations, start_game, remaining_time
 )
 from filters.is_admin import IsAdmin
-from keyboards.inline import create_one_inline_button, create_two_inline_buttons, create_cards_5_buttons
+from keyboards.inline import create_one_inline_button, create_two_inline_buttons, create_cards_5_buttons, \
+    create_pagination_cards_keyboard
 
 router = Router()
 tag = "intro_messages"
@@ -81,9 +82,6 @@ async def initiate_game_with_personal_request_handler(call: CallbackQuery, state
     data = await state.get_data()
     await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
 
-    # await call.message.answer(recommendations, reply_markup=create_one_inline_button(text="Начать игру",
-    #                                                                                  call_data="start_game"))
-
     new_message = await call.message.answer(recommendations + remaining_time.replace('_', '15'))
     await state.update_data(message_id=new_message.message_id)
 
@@ -105,5 +103,5 @@ async def start_the_game_handler(call: CallbackQuery, state: FSMContext):
     await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
     await state.clear()
 
-    await call.message.answer(start_game, reply_markup=create_cards_5_buttons())
+    await call.message.answer(start_game, reply_markup=create_pagination_cards_keyboard())
     await call.answer()

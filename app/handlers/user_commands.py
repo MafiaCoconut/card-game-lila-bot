@@ -6,8 +6,8 @@ from aiogram.fsm.context import FSMContext
 from utils.logs import set_func, set_func_and_person
 from utils.bot import bot
 
-# from data.text import introduce_game_basics, start_game
-from data.text_debug import introduce_game_basics, start_game
+from data.text import introduce_game_basics, start_game
+# from data.text_debug import introduce_game_basics, start_game
 
 from utils.states import EditLastMessageState
 from filters.is_admin import IsAdmin
@@ -96,7 +96,7 @@ async def menu_main_callback_handler(call: CallbackQuery):
     function_name = "command_main_menu_handler"
     set_func_and_person(function_name, tag, call.message)
 
-    await call.message.edit_reply_markup(reply_markup=create_pagination_cards_keyboard())
+    await call.message.edit_text(text=start_game, reply_markup=create_pagination_cards_keyboard())
 
 
 

@@ -21,6 +21,8 @@ def set_inside_func(data, function, tag, status="info"):
         system_logger.info(result)
     elif status == "debug":
         system_logger.debug(result)
+    elif status == "warning":
+        system_logger.warning(result)
 
 
 def set_func_and_person(function, tag, message, status="info"):
