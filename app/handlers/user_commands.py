@@ -6,12 +6,12 @@ from aiogram.fsm.context import FSMContext
 from utils.logs import set_func, set_func_and_person
 from utils.bot import bot
 
-from data.text import introduce_game_basics
-# from data.text_debug import introduce_game_basics
+# from data.text import introduce_game_basics, start_game
+from data.text_debug import introduce_game_basics, start_game
 
 from utils.states import EditLastMessageState
 from filters.is_admin import IsAdmin
-from keyboards.inline import create_one_inline_button, create_two_inline_buttons
+from keyboards.inline import create_one_inline_button, create_two_inline_buttons, create_pagination_cards_keyboard
 
 router = Router()
 tag = "user_commands"
@@ -34,21 +34,24 @@ async def command_start_handler(message: Message, state: FSMContext) -> None:
     await state.update_data(message_id=new_message.message_id)
 
 
-@router.message(Command("help"))
-async def command_help_handler(message: Message, state: FSMContext) -> None:
-    function_name = "command_help_handler"
-    set_func_and_person(function_name, tag, message)
+# @router.message(Command("help"))
+# async def command_help_handler(message: Message, state: FSMContext) -> None:
+#     function_name = "command_help_handler"
+#     set_func_and_person(function_name, tag, message)
+#
+#     await message.answer("Вывод help информации")
 
-    await message.answer("Вывод help информации")
+
+# @router.message(Command("send_voice"))
+# async def command_send_voice_handler(message: Message, state: FSMContext) -> None:
+#     function_name = "command_send_voice_handler"
+#     set_func_and_person(function_name, tag, message)
+#
+#     voice = FSInputFile("path_to_file.ogg")
+#     await bot.send_voice(chat_id=message.chat.id, voice=voice, caption='caption')
 
 
-@router.message(Command("send_voice"))
-async def command_send_voice_handler(message: Message, state: FSMContext) -> None:
-    function_name = "command_send_voice_handler"
-    set_func_and_person(function_name, tag, message)
 
-    voice = FSInputFile("path_to_file.ogg")
-    await bot.send_voice(chat_id=message.chat.id, voice=voice, caption='caption')
 
 
 @router.message(F.text == '/send_user_logs', IsAdmin())
@@ -79,3 +82,21 @@ async def admin_send_system_logs_with_command(message: Message):
 #     # text = "Логи отправлены"
 
 # await message.answer_document(text=text, document=FSInputFile(path='system_data.log'))
+
+
+@router.message(Command("main_menu"))
+async def command_main_menu_handler(message: Message, state: FSMContext) -> None:
+    function_name = "command_main_menu_handler"
+    set_func_and_person(function_name, tag, message)
+
+    await message.answer(start_game, reply_markup=create_pagination_cards_keyboard())
+
+
+async def menu_main_callback_handler(call: CallbackQuery):
+    function_name = "command_main_menu_handler"
+    set_func_and_person(function_name, tag, call.message)
+
+    await call.message.edit_reply_markup(reply_markup=create_pagination_cards_keyboard())
+
+
+

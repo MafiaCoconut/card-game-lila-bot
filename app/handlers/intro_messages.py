@@ -9,13 +9,13 @@ from utils.logs import set_func, set_func_and_person
 from utils.bot import bot
 from utils.states import EditLastMessageState
 
-# from data.text_debug import (
-from data.text import (
+from data.text_debug import (
+# from data.text import (
     introduce_game_basics, essence_of_the_game, rules_of_the_game,
     forms_for_notes, recommendations, start_game, remaining_time
 )
 from filters.is_admin import IsAdmin
-from keyboards.inline import create_one_inline_button, create_two_inline_buttons
+from keyboards.inline import create_one_inline_button, create_two_inline_buttons, create_cards_5_buttons
 
 router = Router()
 tag = "intro_messages"
@@ -103,6 +103,7 @@ async def start_the_game_handler(call: CallbackQuery, state: FSMContext):
 
     data = await state.get_data()
     await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
+    await state.clear()
 
-    await call.message.answer(start_game)
+    await call.message.answer(start_game, reply_markup=create_cards_5_buttons())
     await call.answer()
