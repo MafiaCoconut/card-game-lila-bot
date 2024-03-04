@@ -2,6 +2,7 @@ from aiogram.types import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
 )
+from icecream import ic
 
 
 def get_main_menu():
@@ -95,6 +96,24 @@ def create_cards_keyboard(start: int, end: int):
 
         count_val += 1
         keyboard.inline_keyboard[k].append(InlineKeyboardButton(text=str(i), callback_data=f"card_{i}:{start}-{end}"))
+
+    if start == 1:
+        keyboard.inline_keyboard.append([InlineKeyboardButton(text="11-20", callback_data="list_of_cards_11-20")])
+    elif start == 61:
+        keyboard.inline_keyboard.append([InlineKeyboardButton(text="51-60", callback_data="list_of_cards_51-60")])
+    elif start == 51:
+        keyboard.inline_keyboard.append([
+            InlineKeyboardButton(text=f"{start - 10}-{end - 10}",
+                                 callback_data=f"list_of_cards_{start - 10}-{end - 10}"),
+            InlineKeyboardButton(text=f"{start + 10}-{end + 12}",
+                                 callback_data=f"list_of_cards_{start + 10}-{end + 12}")])
+    else:
+
+        keyboard.inline_keyboard.append([
+            InlineKeyboardButton(text=f"{start-10}-{end-10}",
+                                 callback_data=f"list_of_cards_{start-10}-{end-10}"),
+            InlineKeyboardButton(text=f"{start+10}-{end+10}",
+                                 callback_data=f"list_of_cards_{start+10}-{end+10}")])
 
     keyboard.inline_keyboard.append([InlineKeyboardButton(text="В главное меню", callback_data="to_menu_main")])
     return keyboard
