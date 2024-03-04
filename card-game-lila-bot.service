@@ -4,7 +4,7 @@ After=multi-user.target
 
 [Service]
 type=simple
-ExecStart=/home/pi/Projects/card-game-lila-bot/venv/bin/python /home/pi/Projects/card-game-lila-bot/main.py
+ExecStart=/home/pi/Projects/card-game-lila-bot/venv/bin/python /home/pi/Projects/card-game-lila-bot/app/main.py
 WorkingDirectory=/home/pi/Projects/card-game-lila-bot/
 Restart=always
 
