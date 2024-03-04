@@ -24,7 +24,7 @@ async def command_start_handler(message: Message, state: FSMContext) -> None:
     set_func(function_name, tag, status)
 
     await state.set_state(EditLastMessageState.message_id)
-    new_message = await message.answer_photo(photo=FSInputFile("data/plug.jpg"),
+    new_message = await message.answer_photo(photo=FSInputFile("../data/plug.jpg"),
                                              caption=introduce_game_basics,
                                              reply_markup=create_two_inline_buttons(text1="Давай",
                                                                                     call_data1="send_second_message",

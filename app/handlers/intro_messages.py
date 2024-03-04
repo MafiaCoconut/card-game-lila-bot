@@ -56,11 +56,11 @@ async def forms_for_notes_handler(call: CallbackQuery, state: FSMContext):
 
     new_message = await call.message.answer_photo(
         caption=forms_for_notes + remaining_time.replace('_', '15'),
-        photo=FSInputFile("data/plug.jpg"),
+        photo=FSInputFile("../data/plug.jpg"),
         reply_markup=create_one_inline_button(text="Конечно готов",
                                               call_data="send_fourth_message"))
 
-    await call.message.answer_document(document=FSInputFile("data/blank_for_notes.jpg"))
+    await call.message.answer_document(document=FSInputFile("../data/blank_for_notes.jpg"))
     await state.update_data(message_id=new_message.message_id)
 
     for i in range(14, -1, -1):
