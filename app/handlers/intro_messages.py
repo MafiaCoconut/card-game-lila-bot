@@ -41,15 +41,17 @@ async def rules_of_the_game_handler(call: CallbackQuery) -> None:
     function_name = "rules_of_the_game_handler"
     set_func_and_person(function_name, tag, call.message)
 
-    time_message = await call.message.answer(rules_of_the_game + remaining_time.replace('_', '15'), )
+    time_message = await bot.send_animation(
+        chat_id=call.message.chat.id, animation=FSInputFile("app/data/animation(1).gif"),
+        caption=rules_of_the_game + remaining_time.replace('_', '15'))
 
     for i in range(14, -1, -1):
-        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
-                                    text=rules_of_the_game + remaining_time.replace('_', str(i)))
+        await bot.edit_message_caption(chat_id=call.message.chat.id, message_id=time_message.message_id,
+                                       caption=rules_of_the_game + remaining_time.replace('_', str(i)))
         time.sleep(1)
 
-    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
-                                text=rules_of_the_game)
+    await bot.edit_message_caption(chat_id=call.message.chat.id, message_id=time_message.message_id,
+                                   caption=rules_of_the_game)
 
 
 async def forms_for_notes_handler(call: CallbackQuery, state: FSMContext):
