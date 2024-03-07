@@ -68,10 +68,10 @@ async def forms_for_notes_handler(call: CallbackQuery, state: FSMContext):
                                     text=forms_for_notes + remaining_time.replace('_', str(i), ))
         time.sleep(1)
 
-    await bot.edit_message_caption(chat_id=call.message.chat.id, message_id=new_message.message_id,
-                                   text=forms_for_notes,
-                                   reply_markup=create_one_inline_button(text="Конечно готов",
-                                                                         call_data="send_third_message"))
+    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=new_message.message_id,
+                                text=forms_for_notes,
+                                reply_markup=create_one_inline_button(text="Конечно готов",
+                                                                      call_data="send_third_message"))
 
 
 async def initiate_game_with_personal_request_handler(call: CallbackQuery, state: FSMContext):
