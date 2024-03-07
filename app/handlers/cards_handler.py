@@ -12,6 +12,7 @@ from utils.logs import set_func, set_func_and_person, set_inside_func
 from utils.bot import bot
 from utils.states import EditLastMessageState
 from data.cards import cards_list
+
 tag = "cards_handler"
 
 
@@ -20,8 +21,8 @@ async def send_card_info_handler(call: CallbackQuery):
     set_func_and_person(function_name, tag, call.message)
 
     await call.answer()
-    card_number = call.data[call.data.find('_')+1:call.data.find(':')]
-    card_group = [int(call.data[call.data.find(':')+1:call.data.find('-')]), int(call.data[call.data.find('-')+1:])]
+    card_number = call.data[call.data.find('_') + 1:call.data.find(':')]
+    card_group = [int(call.data[call.data.find(':') + 1:call.data.find('-')]), int(call.data[call.data.find('-') + 1:])]
 
     text = f"*{cards_list[card_number]['title']}*\n\n" + cards_list[card_number]['description'].replace('\n', '\n\n')
 
@@ -38,7 +39,7 @@ async def card_pagination_handler(call: CallbackQuery):
     set_func_and_person(function_name, tag, call.message)
 
     await call.answer()
-    list_of_cards = call.data[call.data.rfind("_")+1:].split('-')
+    list_of_cards = call.data[call.data.rfind("_") + 1:].split('-')
 
     await call.message.edit_reply_markup(reply_markup=create_cards_keyboard(start=int(list_of_cards[0]),
                                                                             end=int(list_of_cards[1])))
