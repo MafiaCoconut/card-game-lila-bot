@@ -41,26 +41,26 @@ async def rules_of_the_game_handler(call: CallbackQuery) -> None:
     function_name = "rules_of_the_game_handler"
     set_func_and_person(function_name, tag, call.message)
 
-    time_message = await bot.send_animation(
+    await call.message.answer_animation(animation=FSInputFile("app/data/animation(1).gif"))
+    time_message = await call.message.answer(
         chat_id=call.message.chat.id, animation=FSInputFile("app/data/animation(1).gif"),
-        caption=rules_of_the_game + remaining_time.replace('_', '15'))
+        text=rules_of_the_game + remaining_time.replace('_', '15'))
 
     for i in range(14, -1, -1):
-        await bot.edit_message_caption(chat_id=call.message.chat.id, message_id=time_message.message_id,
-                                       caption=rules_of_the_game + remaining_time.replace('_', str(i)))
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
+                                    caption=rules_of_the_game + remaining_time.replace('_', str(i)))
         time.sleep(1)
 
-    await bot.edit_message_caption(chat_id=call.message.chat.id, message_id=time_message.message_id,
-                                   caption=rules_of_the_game)
+    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
+                                caption=rules_of_the_game)
 
 
 async def forms_for_notes_handler(call: CallbackQuery, state: FSMContext):
     function_name = "forms_for_notes_handler"
     set_func_and_person(function_name, tag, call.message)
 
-    new_message = await call.message.answer_animation(
-        caption=forms_for_notes + remaining_time.replace('_', '15'),
-        animation=FSInputFile("app/data/animation(1).gif"))
+    await call.message.answer_animation(animation=FSInputFile("app/data/animation(1).gif"))
+    new_message = await call.message.answer(text=forms_for_notes + remaining_time.replace('_', '15'))
 
     await call.message.answer_document(document=FSInputFile("app/data/blank_for_notes.jpg"))
     await state.update_data(message_id=new_message.message_id)
