@@ -7,6 +7,7 @@ import time
 
 from icecream import ic
 
+from handlers.intro_messages import start_the_game_handler
 from keyboards.inline import create_cards_5_buttons, create_cards_keyboard
 from utils.logs import set_func, set_func_and_person, set_inside_func
 from utils.bot import bot
@@ -16,7 +17,7 @@ from data.cards import cards_list
 tag = "cards_handler"
 
 
-async def send_card_info_handler(call: CallbackQuery):
+async def send_card_info_handler(call: CallbackQuery, state: FSMContext):
     function_name = "send_card_info_handler"
     set_func_and_person(function_name, tag, call.message)
 
@@ -27,11 +28,19 @@ async def send_card_info_handler(call: CallbackQuery):
     text = f"*{cards_list[card_number]['title']}*\n\n" + cards_list[card_number]['description'].replace('\n', '\n\n')
 
     try:
-        await call.message.edit_text(text=text,
-                                     reply_markup=create_cards_keyboard(start=card_group[0], end=card_group[1]),
-                                     parse_mode="MARKDOWN")
+        new_card = await call.message.edit_text(
+            text=text,
+            reply_markup=create_cards_keyboard(start=card_group[0],
+                                               end=card_group[1]),
+            parse_mode="MARKDOWN")
+
+        await state.update_data(message_id=new_card.message_id)
+        await call.message.answer("Проанализируй текст этой карты и запиши ключевые моменты в свой бланк.")
+        await start_the_game_handler(call, state)
+
     except Exception as e:
         set_inside_func(data=e, function=function_name, tag=tag, status="warning")
+
 
 
 async def card_pagination_handler(call: CallbackQuery):
