@@ -46,11 +46,11 @@ async def rules_of_the_game_handler(call: CallbackQuery) -> None:
 
     for i in range(14, -1, -1):
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
-                                    caption=rules_of_the_game + remaining_time.replace('_', str(i)))
+                                    text=rules_of_the_game + remaining_time.replace('_', str(i)))
         time.sleep(1)
 
     await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
-                                caption=rules_of_the_game)
+                                text=rules_of_the_game)
 
 
 async def forms_for_notes_handler(call: CallbackQuery, state: FSMContext):
@@ -64,12 +64,12 @@ async def forms_for_notes_handler(call: CallbackQuery, state: FSMContext):
     await state.update_data(message_id=new_message.message_id)
 
     for i in range(14, -1, -1):
-        await bot.edit_message_caption(chat_id=call.message.chat.id, message_id=new_message.message_id,
-                                       caption=forms_for_notes + remaining_time.replace('_', str(i), ))
+        await bot.edit_message_text(chat_id=call.message.chat.id, message_id=new_message.message_id,
+                                    text=forms_for_notes + remaining_time.replace('_', str(i), ))
         time.sleep(1)
 
     await bot.edit_message_caption(chat_id=call.message.chat.id, message_id=new_message.message_id,
-                                   caption=forms_for_notes,
+                                   text=forms_for_notes,
                                    reply_markup=create_one_inline_button(text="Конечно готов",
                                                                          call_data="send_third_message"))
 
