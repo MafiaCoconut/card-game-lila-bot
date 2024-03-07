@@ -30,7 +30,7 @@ async def introduce_lila_for_self_discovery_handler(call: CallbackQuery, state: 
     await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
     await call.answer()
 
-    await bot.send_animation(chat_id=call.message.chat.id, animation=FSInputFile("data/animation(1).gif"),
+    await bot.send_animation(chat_id=call.message.chat.id, animation=FSInputFile("app/data/animation(1).gif"),
                              caption=essence_of_the_game)
     # await call.message.answer(essence_of_the_game)
     await rules_of_the_game_handler(call)
@@ -58,7 +58,7 @@ async def forms_for_notes_handler(call: CallbackQuery, state: FSMContext):
 
     new_message = await call.message.answer_animation(
         caption=forms_for_notes + remaining_time.replace('_', '15'),
-        animation=FSInputFile("data/animation(1).gif"))
+        animation=FSInputFile("app/data/animation(1).gif"))
 
     await call.message.answer_document(document=FSInputFile("data/blank_for_notes.jpg"))
     await state.update_data(message_id=new_message.message_id)
@@ -103,6 +103,6 @@ async def start_the_game_handler(call: CallbackQuery, state: FSMContext):
     await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
     await state.clear()
 
-    await call.message.answer_photo(photo=FSInputFile('data/cards_plug.jpg'))
+    await call.message.answer_photo(photo=FSInputFile('app/data/cards_plug.jpg'))
     await call.message.answer(text=start_game, reply_markup=create_pagination_cards_keyboard())
     await call.answer()

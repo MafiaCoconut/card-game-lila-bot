@@ -95,7 +95,7 @@ async def admin_send_system_logs_with_command(message: Message):
 async def command_main_menu_handler(message: Message, state: FSMContext) -> None:
     function_name = "command_main_menu_handler"
     set_func_and_person(function_name, tag, message)
-    await message.answer_photo(photo=FSInputFile("data/cards_plug.jpg"))
+    await message.answer_photo(photo=FSInputFile("app/data/cards_plug.jpg"))
     await message.answer(start_game, reply_markup=create_pagination_cards_keyboard())
 
 
