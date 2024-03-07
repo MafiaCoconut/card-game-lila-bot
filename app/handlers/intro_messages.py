@@ -43,8 +43,7 @@ async def rules_of_the_game_handler(call: CallbackQuery) -> None:
 
     await call.message.answer_animation(animation=FSInputFile("app/data/animation(1).gif"))
     time_message = await call.message.answer(
-        chat_id=call.message.chat.id, animation=FSInputFile("app/data/animation(1).gif"),
-        text=rules_of_the_game + remaining_time.replace('_', '15'))
+        chat_id=call.message.chat.id, text=rules_of_the_game + remaining_time.replace('_', '15'))
 
     for i in range(14, -1, -1):
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
