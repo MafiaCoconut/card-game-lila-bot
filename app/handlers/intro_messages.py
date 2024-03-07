@@ -60,7 +60,7 @@ async def forms_for_notes_handler(call: CallbackQuery, state: FSMContext):
         caption=forms_for_notes + remaining_time.replace('_', '15'),
         animation=FSInputFile("app/data/animation(1).gif"))
 
-    await call.message.answer_document(document=FSInputFile("data/blank_for_notes.jpg"))
+    await call.message.answer_document(document=FSInputFile("app/data/blank_for_notes.jpg"))
     await state.update_data(message_id=new_message.message_id)
 
     for i in range(14, -1, -1):
