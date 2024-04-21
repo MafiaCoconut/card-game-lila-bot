@@ -30,8 +30,9 @@ async def introduce_lila_for_self_discovery_handler(call: CallbackQuery, state: 
     await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
     await call.answer()
 
-    await bot.send_animation(chat_id=call.message.chat.id, animation=FSInputFile("app/data/animation(1).gif"),
+    await bot.send_animation(chat_id=call.message.chat.id, animation=FSInputFile("data/animation(1).gif"),
                              caption=essence_of_the_game)
+    await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/1-Суть-игры.ogg"))
     # await call.message.answer(essence_of_the_game)
     await rules_of_the_game_handler(call)
     await forms_for_notes_handler(call, state)
@@ -41,8 +42,9 @@ async def rules_of_the_game_handler(call: CallbackQuery) -> None:
     function_name = "rules_of_the_game_handler"
     set_func_and_person(function_name, tag, call.message)
 
-    await call.message.answer_animation(animation=FSInputFile("app/data/animation(1).gif"))
+    await call.message.answer_animation(animation=FSInputFile("data/animation(1).gif"))
     time_message = await call.message.answer(text=rules_of_the_game + remaining_time.replace('_', '15'))
+    await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/2-Правила-игры.ogg"))
 
     for i in range(14, -1, -1):
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
@@ -57,10 +59,11 @@ async def forms_for_notes_handler(call: CallbackQuery, state: FSMContext):
     function_name = "forms_for_notes_handler"
     set_func_and_person(function_name, tag, call.message)
 
-    await call.message.answer_animation(animation=FSInputFile("app/data/animation(1).gif"))
+    await call.message.answer_animation(animation=FSInputFile("data/animation(1).gif"))
     new_message = await call.message.answer(text=forms_for_notes + remaining_time.replace('_', '15'))
+    await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/3-Бланки.ogg"))
 
-    await call.message.answer_document(document=FSInputFile("app/data/blank_for_notes.jpg"))
+    await call.message.answer_document(document=FSInputFile("data/blank_for_notes.jpg"))
     await state.update_data(message_id=new_message.message_id)
 
     for i in range(14, -1, -1):
@@ -83,6 +86,8 @@ async def initiate_game_with_personal_request_handler(call: CallbackQuery, state
     await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
 
     new_message = await call.message.answer(recommendations + remaining_time.replace('_', '15'))
+    await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/4-Формулировка-запроса.ogg"))
+
     await state.update_data(message_id=new_message.message_id)
 
     for i in range(14, -1, -1):
@@ -103,6 +108,6 @@ async def start_the_game_handler(call: CallbackQuery, state: FSMContext):
     await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
     await state.clear()
 
-    await call.message.answer_photo(photo=FSInputFile('app/data/cards_plug.jpg'))
+    await call.message.answer_photo(photo=FSInputFile('data/cards_plug.jpg'))
     await call.message.answer(text=start_game, reply_markup=create_pagination_cards_keyboard())
     await call.answer()

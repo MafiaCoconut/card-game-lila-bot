@@ -25,7 +25,7 @@ async def send_card_info_handler(call: CallbackQuery, state: FSMContext):
     card_number = call.data[call.data.find('_') + 1:call.data.find(':')]
     card_group = [int(call.data[call.data.find(':') + 1:call.data.find('-')]), int(call.data[call.data.find('-') + 1:])]
 
-    text = f"*{cards_list[card_number]['title']}*\n\n" + cards_list[card_number]['description'].replace('\n', '\n\n')
+    text = f"*{card_number} {cards_list[card_number]['title']}*\n\n" + cards_list[card_number]['description'].replace('\n', '\n\n')
 
     try:
         new_card = await call.message.edit_text(
@@ -40,7 +40,6 @@ async def send_card_info_handler(call: CallbackQuery, state: FSMContext):
 
     except Exception as e:
         set_inside_func(data=e, function=function_name, tag=tag, status="warning")
-
 
 
 async def card_pagination_handler(call: CallbackQuery):
