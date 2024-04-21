@@ -7,6 +7,7 @@ import time
 
 from icecream import ic
 
+from data.text import end_game
 from handlers.intro_messages import start_the_game_handler
 from keyboards.inline import create_cards_5_buttons, create_cards_keyboard
 from utils.logs import set_func, set_func_and_person, set_inside_func
@@ -22,25 +23,29 @@ async def send_card_info_handler(call: CallbackQuery, state: FSMContext):
     set_func_and_person(function_name, tag, call.message)
 
     await call.answer()
+
     card_number = call.data[call.data.find('_') + 1:call.data.find(':')]
-    card_group = [int(call.data[call.data.find(':') + 1:call.data.find('-')]), int(call.data[call.data.find('-') + 1:])]
+    if card_number == "68":
+        await call.message.answer(end_game)
+        await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/5-Завершение-игры.ogg"))
+    else:
+        card_group = [int(call.data[call.data.find(':') + 1:call.data.find('-')]), int(call.data[call.data.find('-') + 1:])]
 
-    text = f"*{cards_list[card_number]['title']}*\n\n" + cards_list[card_number]['description'].replace('\n', '\n\n')
+        text = f"*{card_number} {cards_list[card_number]['title']}*\n\n" + cards_list[card_number]['description'].replace('\n', '\n\n')
 
-    try:
-        new_card = await call.message.edit_text(
-            text=text,
-            reply_markup=create_cards_keyboard(start=card_group[0],
-                                               end=card_group[1]),
-            parse_mode="MARKDOWN")
+        try:
+            new_card = await call.message.edit_text(
+                text=text,
+                reply_markup=create_cards_keyboard(start=card_group[0],
+                                                   end=card_group[1]),
+                parse_mode="MARKDOWN")
 
-        await state.update_data(message_id=new_card.message_id)
-        await call.message.answer("Проанализируй текст этой карты и запиши ключевые моменты в свой бланк.")
-        await start_the_game_handler(call, state)
+            await state.update_data(message_id=new_card.message_id)
+            await call.message.answer("Проанализируй текст этой карты и запиши ключевые моменты в свой бланк.")
+            await start_the_game_handler(call, state)
 
-    except Exception as e:
-        set_inside_func(data=e, function=function_name, tag=tag, status="warning")
-
+        except Exception as e:
+            set_inside_func(data=e, function=function_name, tag=tag, status="warning")
 
 
 async def card_pagination_handler(call: CallbackQuery):
