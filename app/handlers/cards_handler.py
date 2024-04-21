@@ -26,8 +26,10 @@ async def send_card_info_handler(call: CallbackQuery, state: FSMContext):
 
     card_number = call.data[call.data.find('_') + 1:call.data.find(':')]
     if card_number == "68":
+        await call.message.answer_animation(animation=FSInputFile("data/animation(1).gif"))
+
         await call.message.answer(end_game)
-        await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/5-Завершение-игры.ogg"))
+        await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/5.ogg"))
     else:
         card_group = [int(call.data[call.data.find(':') + 1:call.data.find('-')]), int(call.data[call.data.find('-') + 1:])]
 
