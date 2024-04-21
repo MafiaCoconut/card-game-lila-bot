@@ -57,10 +57,10 @@ def logs_settings():
     formatter = logging.Formatter(fmt='[%(levelname)s] %(asctime)s - %(message)s', datefmt='%d.%m-%H:%M')
 
     # Настройка вывода данных в файлы
-    system_handler = logging.FileHandler('system_data.log', encoding='utf-8')
+    system_handler = logging.FileHandler('data/logs/system_data.log', encoding='utf-8')
     system_handler.setFormatter(formatter)
 
-    user_handler = logging.FileHandler('user_data.log', encoding='utf-8')
+    user_handler = logging.FileHandler('data/logs/user_data.log', encoding='utf-8')
     user_handler.setFormatter(formatter)
 
     global system_logger
