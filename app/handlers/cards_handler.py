@@ -37,6 +37,7 @@ async def send_card_info_handler(call: CallbackQuery, state: FSMContext):
             reply_markup=create_cards_keyboard(start=card_group[0],
                                                end=card_group[1]),
             parse_mode="MARKDOWN")
+        await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile(f"data/{card_number}.ogg"))
 
         await state.update_data(message_id=new_card.message_id)
         await call.message.answer("Проанализируй текст этой карты и запиши ключевые моменты в свой бланк.")
