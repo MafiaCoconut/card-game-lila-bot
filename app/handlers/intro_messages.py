@@ -32,7 +32,7 @@ async def introduce_lila_for_self_discovery_handler(call: CallbackQuery, state: 
 
     await bot.send_animation(chat_id=call.message.chat.id, animation=FSInputFile("data/animation(1).gif"))
     time_message = await call.message.answer(text=essence_of_the_game + remaining_time.replace('_', '30'))
-    await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/1.ogg"))
+    await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/introduce.ogg"))
 
     for i in range(29, -1, -3):
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
@@ -53,7 +53,7 @@ async def rules_of_the_game_handler(call: CallbackQuery) -> None:
 
     await call.message.answer_animation(animation=FSInputFile("data/animation(1).gif"))
     time_message = await call.message.answer(text=rules_of_the_game + remaining_time.replace('_', '30'))  # !!!!
-    await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/2.ogg"))
+    await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/rules.ogg"))
 
     for i in range(29, -1, -3):
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
@@ -70,7 +70,7 @@ async def forms_for_notes_handler(call: CallbackQuery, state: FSMContext):
 
     await call.message.answer_animation(animation=FSInputFile("data/animation(1).gif"))
     new_message = await call.message.answer(text=forms_for_notes + remaining_time.replace('_', '15'))
-    await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/3.ogg"))
+    await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/forms_for_notes.ogg"))
 
     await call.message.answer_document(document=FSInputFile("data/blank_for_notes.jpg"))
     await state.update_data(message_id=new_message.message_id)
@@ -95,7 +95,7 @@ async def initiate_game_with_personal_request_handler(call: CallbackQuery, state
     await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
 
     new_message = await call.message.answer(recommendations + remaining_time.replace('_', '15'))
-    await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/4.ogg"))
+    await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/initiate_game_with_personal_request.ogg"))
 
     await state.update_data(message_id=new_message.message_id)
 
@@ -120,3 +120,5 @@ async def start_the_game_handler(call: CallbackQuery, state: FSMContext):
     await call.message.answer_photo(photo=FSInputFile('data/cards_plug.jpg'))
     await call.message.answer(text=start_game, reply_markup=create_pagination_cards_keyboard())
     await call.answer()
+
+

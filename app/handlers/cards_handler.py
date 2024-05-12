@@ -7,9 +7,9 @@ import time
 
 from icecream import ic
 
-from data.text import end_game
+from data.text import end_game, menu_game
 from handlers.intro_messages import start_the_game_handler
-from keyboards.inline import create_cards_5_buttons, create_cards_keyboard
+from keyboards.inline import create_cards_5_buttons, create_cards_keyboard, create_pagination_cards_keyboard
 from utils.logs import set_func, set_func_and_person, set_inside_func
 from utils.bot import bot
 from utils.states import EditLastMessageState
@@ -25,29 +25,34 @@ async def send_card_info_handler(call: CallbackQuery, state: FSMContext):
     await call.answer()
 
     card_number = call.data[call.data.find('_') + 1:call.data.find(':')]
-    if card_number == "68":
-        await call.message.answer_animation(animation=FSInputFile("data/animation(1).gif"))
 
-        await call.message.answer(end_game)
-        await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/5.ogg"))
-    else:
-        card_group = [int(call.data[call.data.find(':') + 1:call.data.find('-')]), int(call.data[call.data.find('-') + 1:])]
 
-        text = f"*{card_number} {cards_list[card_number]['title']}*\n\n" + cards_list[card_number]['description'].replace('\n', '\n\n')
+    card_group = [int(call.data[call.data.find(':') + 1:call.data.find('-')]), int(call.data[call.data.find('-') + 1:])]
 
-        try:
-            new_card = await call.message.edit_text(
-                text=text,
-                reply_markup=create_cards_keyboard(start=card_group[0],
-                                                   end=card_group[1]),
-                parse_mode="MARKDOWN")
+    text = f"*{card_number} {cards_list[card_number]['title']}*\n\n" + cards_list[card_number]['description'].replace('\n', '\n\n')
 
-            await state.update_data(message_id=new_card.message_id)
-            await call.message.answer("Проанализируй текст этой карты и запиши ключевые моменты в свой бланк.")
-            await start_the_game_handler(call, state)
+    try:
+        new_card = await call.message.edit_text(
+            text=text,
+            reply_markup=create_cards_keyboard(start=card_group[0],
+                                               end=card_group[1]),
+            parse_mode="MARKDOWN")
 
-        except Exception as e:
-            set_inside_func(data=e, function=function_name, tag=tag, status="warning")
+        await state.update_data(message_id=new_card.message_id)
+        await call.message.answer("Проанализируй текст этой карты и запиши ключевые моменты в свой бланк.")
+        if card_number == "68":
+            await call.message.answer_animation(animation=FSInputFile("data/animation(1).gif"))
+
+            await call.message.answer(end_game)
+            await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile("data/end_game_voice.ogg"))
+            await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=new_card.message_id,
+                                                reply_markup=None)
+            await state.clear()
+        else:
+            await menu_main_game_handler(call, state)
+
+    except Exception as e:
+        set_inside_func(data=e, function=function_name, tag=tag, status="warning")
 
 
 async def card_pagination_handler(call: CallbackQuery):
@@ -59,3 +64,16 @@ async def card_pagination_handler(call: CallbackQuery):
 
     await call.message.edit_reply_markup(reply_markup=create_cards_keyboard(start=int(list_of_cards[0]),
                                                                             end=int(list_of_cards[1])))
+
+
+async def menu_main_game_handler(call: CallbackQuery, state: FSMContext):
+    function_name = "menu_main_game_handler"
+    set_func_and_person(function_name, tag, call.message)
+
+    data = await state.get_data()
+    await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
+    await state.clear()
+
+    await call.message.answer_photo(photo=FSInputFile('data/cards_plug.jpg'))
+    await call.message.answer(text=menu_game, reply_markup=create_pagination_cards_keyboard())
+    await call.answer()
