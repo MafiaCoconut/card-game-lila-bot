@@ -67,7 +67,7 @@ async def admin_send_user_logs_with_command(message: Message):
 
     text = "Пользовательские логи отправлены"
 
-    await message.answer_document(text=text, document=FSInputFile(path='user_data.log'))
+    await message.answer_document(text=text, document=FSInputFile(path='data/logs/user_data.log'))
 
 
 @router.message(F.text == '/send_system_logs', IsAdmin())
@@ -77,7 +77,7 @@ async def admin_send_system_logs_with_command(message: Message):
 
     text = "Логи отправлены"
 
-    await message.answer_document(text=text, document=FSInputFile(path='system_data.log'))
+    await message.answer_document(text=text, document=FSInputFile(path='data/logs/system_data.log'))
 
 
 # @router.message(F.text == '/test')
