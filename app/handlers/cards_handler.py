@@ -40,7 +40,7 @@ async def send_card_info_handler(call: CallbackQuery, state: FSMContext):
         await bot.send_voice(chat_id=call.message.chat.id, voice=FSInputFile(f"data/{card_number}.ogg"))
 
         await state.update_data(message_id=new_card.message_id)
-        await call.message.answer("Проанализируй текст этой карты и запиши ключевые моменты в свой бланк.")
+        # await call.message.answer("Проанализируй текст этой карты и запиши ключевые моменты в свой бланк.")
         if card_number == "68":
             await call.message.answer_animation(animation=FSInputFile("data/animation(1).gif"))
 
