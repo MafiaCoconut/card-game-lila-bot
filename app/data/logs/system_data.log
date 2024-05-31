@@ -1,0 +1,425 @@
+[INFO] 21.04-23:32 - Start polling
+[INFO] 21.04-23:32 - Run polling for bot @Lila_provodnik_bot id=6447971261 - 'Бот-проводник ЛИЛА. ПУТЬ К СЕБЕ.🤍'
+[DEBUG] 21.04-23:32 - Called Tag:[user_commands] Function:(command_start_handler)
+[INFO] 21.04-23:32 - Update id=409433344 is handled. Duration 152 ms by bot id=6447971261
+[WARNING] 21.04-23:32 - Received SIGINT signal
+[INFO] 21.04-23:32 - Polling stopped for bot @Lila_provodnik_bot id=6447971261 - 'Бот-проводник ЛИЛА. ПУТЬ К СЕБЕ.🤍'
+[INFO] 21.04-23:32 - Polling stopped
+[INFO] 21.04-23:32 - Update id=409433345 is not handled. Duration 10347 ms by bot id=6447971261
+[ERROR] 21.04-23:32 - Cause exception while process update id=409433345 by bot id=6447971261
+TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2702)
+Traceback (most recent call last):
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/aiohttp.py", line 170, in make_request
+    async with session.post(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiohttp/client.py", line 1194, in __aenter__
+    self._resp = await self._coro
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiohttp/client.py", line 605, in _request
+    await resp.start(conn)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiohttp/client_reqrep.py", line 966, in start
+    message, payload = await protocol.read()  # type: ignore[union-attr]
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiohttp/streams.py", line 622, in read
+    await self._waiter
+aiohttp.client_exceptions.ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2702)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/app/handlers/intro_messages.py", line 38, in introduce_lila_for_self_discovery_handler
+    await bot.edit_message_text(chat_id=call.message.chat.id, message_id=time_message.message_id,
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 1543, in edit_message_text
+    return await self(call, request_timeout=request_timeout)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/aiohttp.py", line 177, in make_request
+    raise TelegramNetworkError(method=method, message=f"{type(e).__name__}: {e}")
+aiogram.exceptions.TelegramNetworkError: HTTP Client says - ClientOSError: [Errno 1] [SSL: APPLICATION_DATA_AFTER_CLOSE_NOTIFY] application data after close notify (_ssl.c:2702)
+[INFO] 31.05-15:09 - Start polling
+[INFO] 31.05-15:09 - Run polling for bot @Lila_provodnik_bot id=6447971261 - 'Бот-проводник ЛИЛА. ПУТЬ К СЕБЕ.🤍'
+[DEBUG] 31.05-15:09 - Called Tag:[user_commands] Function:(command_start_handler)
+[DEBUG] 31.05-15:09 - Called Tag:[user_commands] Function:(command_start_handler)
+[DEBUG] 31.05-15:09 - Called Tag:[user_commands] Function:(command_start_handler)
+[DEBUG] 31.05-15:09 - Called Tag:[user_commands] Function:(command_start_handler)
+[DEBUG] 31.05-15:09 - Called Tag:[user_commands] Function:(command_start_handler)
+[DEBUG] 31.05-15:09 - Called Tag:[user_commands] Function:(command_start_handler)
+[DEBUG] 31.05-15:09 - Called Tag:[user_commands] Function:(command_start_handler)
+[DEBUG] 31.05-15:09 - Called Tag:[user_commands] Function:(command_start_handler)
+[DEBUG] 31.05-15:09 - Called Tag:[user_commands] Function:(command_start_handler)
+[DEBUG] 31.05-15:09 - Called Tag:[user_commands] Function:(command_start_handler)
+[INFO] 31.05-15:09 - Update id=409436640 is not handled. Duration 2410 ms by bot id=6447971261
+[ERROR] 31.05-15:09 - Cause exception while process update id=409436640 by bot id=6447971261
+TelegramForbiddenError: Telegram server says - Forbidden: bot was blocked by the user
+Traceback (most recent call last):
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/app/handlers/user_commands.py", line 36, in command_start_handler
+    new_message = await message.answer(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 128, in check_response
+    raise TelegramForbiddenError(method=method, message=description)
+aiogram.exceptions.TelegramForbiddenError: Telegram server says - Forbidden: bot was blocked by the user
+[INFO] 31.05-15:09 - Update id=409436646 is handled. Duration 2447 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436643 is handled. Duration 2544 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436630 is handled. Duration 2550 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436634 is handled. Duration 2559 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436642 is handled. Duration 2603 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436635 is not handled. Duration 2620 ms by bot id=6447971261
+[ERROR] 31.05-15:09 - Cause exception while process update id=409436635 by bot id=6447971261
+TelegramForbiddenError: Telegram server says - Forbidden: bot was blocked by the user
+Traceback (most recent call last):
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/app/handlers/user_commands.py", line 36, in command_start_handler
+    new_message = await message.answer(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 128, in check_response
+    raise TelegramForbiddenError(method=method, message=description)
+aiogram.exceptions.TelegramForbiddenError: Telegram server says - Forbidden: bot was blocked by the user
+[INFO] 31.05-15:09 - Update id=409436644 is handled. Duration 2617 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436629 is handled. Duration 2716 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436633 is handled. Duration 2780 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436632 is handled. Duration 3377 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436636 is not handled. Duration 3982 ms by bot id=6447971261
+[ERROR] 31.05-15:09 - Cause exception while process update id=409436636 by bot id=6447971261
+TelegramForbiddenError: Telegram server says - Forbidden: bot was blocked by the user
+Traceback (most recent call last):
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/app/handlers/user_commands.py", line 98, in command_main_menu_handler
+    await message.answer_photo(photo=FSInputFile("data/cards_plug.jpg"))
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 128, in check_response
+    raise TelegramForbiddenError(method=method, message=description)
+aiogram.exceptions.TelegramForbiddenError: Telegram server says - Forbidden: bot was blocked by the user
+[INFO] 31.05-15:09 - Update id=409436639 is not handled. Duration 4158 ms by bot id=6447971261
+[ERROR] 31.05-15:09 - Cause exception while process update id=409436639 by bot id=6447971261
+TelegramForbiddenError: Telegram server says - Forbidden: bot was blocked by the user
+Traceback (most recent call last):
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/app/handlers/user_commands.py", line 98, in command_main_menu_handler
+    await message.answer_photo(photo=FSInputFile("data/cards_plug.jpg"))
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 128, in check_response
+    raise TelegramForbiddenError(method=method, message=description)
+aiogram.exceptions.TelegramForbiddenError: Telegram server says - Forbidden: bot was blocked by the user
+[INFO] 31.05-15:09 - Update id=409436637 is not handled. Duration 4199 ms by bot id=6447971261
+[ERROR] 31.05-15:09 - Cause exception while process update id=409436637 by bot id=6447971261
+TelegramForbiddenError: Telegram server says - Forbidden: bot was blocked by the user
+Traceback (most recent call last):
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/app/handlers/user_commands.py", line 98, in command_main_menu_handler
+    await message.answer_photo(photo=FSInputFile("data/cards_plug.jpg"))
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 128, in check_response
+    raise TelegramForbiddenError(method=method, message=description)
+aiogram.exceptions.TelegramForbiddenError: Telegram server says - Forbidden: bot was blocked by the user
+[INFO] 31.05-15:09 - Update id=409436638 is not handled. Duration 4462 ms by bot id=6447971261
+[ERROR] 31.05-15:09 - Cause exception while process update id=409436638 by bot id=6447971261
+TelegramForbiddenError: Telegram server says - Forbidden: bot was blocked by the user
+Traceback (most recent call last):
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 156, in _propagate_event
+    response = await router.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/app/handlers/user_commands.py", line 98, in command_main_menu_handler
+    await message.answer_photo(photo=FSInputFile("data/cards_plug.jpg"))
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/methods/base.py", line 84, in emit
+    return await bot(self)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/bot.py", line 492, in __call__
+    return await self.session(self, method, timeout=request_timeout)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 254, in __call__
+    return cast(TelegramType, await middleware(bot, method))
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/aiohttp.py", line 178, in make_request
+    response = self.check_response(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/client/session/base.py", line 128, in check_response
+    raise TelegramForbiddenError(method=method, message=description)
+aiogram.exceptions.TelegramForbiddenError: Telegram server says - Forbidden: bot was blocked by the user
+[INFO] 31.05-15:09 - Update id=409436647 is handled. Duration 4537 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436649 is handled. Duration 4623 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436641 is handled. Duration 4782 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436645 is handled. Duration 4845 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436648 is handled. Duration 4977 ms by bot id=6447971261
+[INFO] 31.05-15:09 - Update id=409436631 is handled. Duration 5448 ms by bot id=6447971261
+[WARNING] 31.05-15:09 - Received SIGINT signal
+[INFO] 31.05-15:09 - Polling stopped for bot @Lila_provodnik_bot id=6447971261 - 'Бот-проводник ЛИЛА. ПУТЬ К СЕБЕ.🤍'
+[INFO] 31.05-15:09 - Polling stopped
+[INFO] 31.05-15:10 - Start polling
+[INFO] 31.05-15:10 - Run polling for bot @Lila_provodnik_bot id=6447971261 - 'Бот-проводник ЛИЛА. ПУТЬ К СЕБЕ.🤍'
+[INFO] 31.05-15:10 - Update id=409436650 is not handled. Duration 1 ms by bot id=6447971261
+[ERROR] 31.05-15:10 - Cause exception while process update id=409436650 by bot id=6447971261
+KeyError: 'message_id'
+Traceback (most recent call last):
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 27, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/fsm/middleware.py", line 41, in __call__
+    return await handler(event, data)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 128, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 123, in _wrapped
+    return await self._propagate_event(
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/router.py", line 148, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/venv/lib/python3.10/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+  File "/home/mafiacoconut/PythonProjeckts/card-game-lila-bot/app/handlers/intro_messages.py", line 30, in introduce_lila_for_self_discovery_handler
+    await bot.edit_message_reply_markup(chat_id=call.message.chat.id, message_id=data["message_id"], reply_markup=None)
+KeyError: 'message_id'
+[WARNING] 31.05-15:10 - Received SIGINT signal
+[INFO] 31.05-15:10 - Polling stopped for bot @Lila_provodnik_bot id=6447971261 - 'Бот-проводник ЛИЛА. ПУТЬ К СЕБЕ.🤍'
+[INFO] 31.05-15:10 - Polling stopped
