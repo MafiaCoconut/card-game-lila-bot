@@ -1,16 +1,20 @@
-FROM python:3.11
+FROM python:3.11-slim
 
-RUN set +x \
- && apt update \
- && apt upgrade -y \
- && apt install -y curl gcc build-essential \
- && apt-get install -y firefox-esr
+# Обновление системы и установка зависимостей
+RUN apt-get update \
+ && apt-get upgrade -y \
+ && apt-get install -y curl gcc build-essential firefox-esr \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
+# Установка зависимостей Python
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
 
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-
-COPY /app /app
+# Копирование приложения
+COPY ./app /app
 WORKDIR /app
 
+# Запуск приложения
 CMD ["python", "main.py"]
+

@@ -166,5 +166,9 @@ data/main.sqlite
 config/settings.py
 test.py
 geckodriver.exe
-system_data.log
-user_data.log
+#system_data.log
+#user_data.log
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
